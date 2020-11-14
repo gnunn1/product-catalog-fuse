@@ -1,0 +1,175 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Product API",
+        "version": "1.0.0",
+        "description": "An API for managing products in the catalog",
+        "contact": {
+            "name": "Gerald Nunn",
+            "email": "gnunn@redhat-deleteme.com"
+        },
+        "license": {
+            "name": "GNU GPLv3",
+            "url": "https://www.gnu.org/licenses/gpl.txt"
+        }
+    },
+    "paths": {
+        "/products": {
+            "summary": "Path used to manage the list of products.",
+            "description": "The REST endpoint/path used to list and create zero or more `product` entities.  This path contains a `GET` and `POST` operation to perform the list and create tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/product"
+                                    }
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns an array of `product` entities."
+                    }
+                },
+                "operationId": "getproducts",
+                "summary": "List All products",
+                "description": "Gets a list of all `product` entities."
+            },
+            "post": {
+                "requestBody": {
+                    "description": "A new `product` to be created.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/product"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "createproduct",
+                "summary": "Create a product",
+                "description": "Creates a new instance of a `product`."
+            }
+        },
+        "/products/{id}": {
+            "summary": "Path used to manage a single product.",
+            "description": "The REST endpoint/path used to get, update, and delete single instances of an `product`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
+            "get": {
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/product"
+                                }
+                            }
+                        },
+                        "description": "Successful response - returns a single `product`."
+                    }
+                },
+                "operationId": "getproduct",
+                "summary": "Get a product",
+                "description": "Gets the details of a single instance of a `product`."
+            },
+            "put": {
+                "requestBody": {
+                    "description": "Updated `product` information.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/product"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "updateproduct",
+                "summary": "Update a product",
+                "description": "Updates an existing `product`."
+            },
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "Successful response."
+                    }
+                },
+                "operationId": "deleteproduct",
+                "summary": "Delete a product",
+                "description": "Deletes an existing `product`."
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "description": "A unique identifier for a `product`.",
+                    "schema": {
+                        "type": "integer"
+                    },
+                    "in": "path",
+                    "required": true
+                }
+            ]
+        }
+    },
+    "components": {
+        "schemas": {
+            "product": {
+                "title": "Root Type for product",
+                "description": "Product schema in the catalog",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "Unique identifier for the product",
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "The description of the product",
+                        "type": "string"
+                    },
+                    "price": {
+                        "format": "double",
+                        "description": "The price of the product",
+                        "type": "number"
+                    },
+                    "category_id": {
+                        "description": "The identifier of the category to associate the product with.",
+                        "type": "integer"
+                    },
+                    "created": {
+                        "format": "date",
+                        "description": "When the product was created",
+                        "type": "string"
+                    },
+                    "modified": {
+                        "description": "When the product was last modified",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "id": "0",
+                    "name": "iPhone 12",
+                    "description": "Apple iPhone 12",
+                    "price": "999.99",
+                    "category_id": "0",
+                    "created": "2016-12-20",
+                    "modified": "2016-12-20 07:02:28.000000"
+                }
+            }
+        }
+    }
+}
