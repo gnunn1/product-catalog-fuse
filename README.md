@@ -1,18 +1,18 @@
 ### Introduction
 
-This is a demo showing how to build a Fuse camel service following a contract first approach. This demo is based on the article (here)[https://developers.redhat.com/blog/2019/07/09/api-first-design-with-openapi-and-red-hat-fuse/] but uses my own database structure that I use in other demos.
+This is a demo showing how to build a Fuse camel service following a contract first approach. This demo is based on the article [here](https://developers.redhat.com/blog/2019/07/09/api-first-design-with-openapi-and-red-hat-fuse) but uses my own database structure that I use in other demos.
 
 ### Creating the Open API Spec
 
-To create the Open API specification we deploy the Red Hat API Designer into OpenShift. If you do not have OpenShift, you can use (APICurio)[https://www.apicur.io/apicurito/pwa/] which is the upstream version of Red Hat API Designer.
+To create the Open API specification we deploy the Red Hat API Designer into OpenShift. If you do not have OpenShift, you can use [APICurio](https://www.apicur.io/apicurito/pwa/) which is the upstream version of Red Hat API Designer.
 
 To create an example of the Open API spec, click the New API button as per below:
 
-[alt text](https://raw.githubusercontent.com/gnunn1/product-catalog-fuse/master/docs/img/apidesigner-newapi.png)
+![API Designer New API](https://raw.githubusercontent.com/gnunn1/product-catalog-fuse/master/docs/img/apidesigner-newapi.png)
 
 And then click the "Add a data type" button as per below:
 
-[alt text](https://raw.githubusercontent.com/gnunn1/product-catalog-fuse/master/docs/img/apidesigner-adddatatype.png)
+![API Designer New Data Type](https://raw.githubusercontent.com/gnunn1/product-catalog-fuse/master/docs/img/apidesigner-adddatatype.png)
 
 Finally using the example provided below, fill out the screen as per the image.
 
@@ -28,7 +28,7 @@ Finally using the example provided below, fill out the screen as per the image.
 }
 ```
 
-[alt text](https://raw.githubusercontent.com/gnunn1/product-catalog-fuse/master/docs/img/apidesigner-adddatatype.png)
+![API Designer New Data Type Example](https://raw.githubusercontent.com/gnunn1/product-catalog-fuse/master/docs/img/apidesigner-adddatatype.png)
 
 Make sure the `Rest Resource` button is selected so that it will generate a skeleton CRUD interface for you.
 
