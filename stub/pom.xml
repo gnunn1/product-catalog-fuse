@@ -131,6 +131,7 @@
               <packageName>com.redhat.demo.generated</packageName>
               <outputDirectory>${project.basedir}/src/main/java</outputDirectory>
               <specificationUri>src/spec/product.json</specificationUri>
+              <apiContextPath>/api-docs</apiContextPath>
           </configuration>
       </plugin>
       <!-- Core plugins -->
