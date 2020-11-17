@@ -1,0 +1,19 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: product-catalog-fuse
+    app.kubernetes.io/component: product-catalog-fuse
+    app.kubernetes.io/instance: product-catalog-fuse
+    app.kubernetes.io/name: product-catalog-fuse
+    app.kubernetes.io/part-of: product-catalog
+    app.openshift.io/runtime: camel
+  name: product-catalog-fuse
+spec:
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: product-catalog-fuse
+    weight: 100
+  wildcardPolicy: None

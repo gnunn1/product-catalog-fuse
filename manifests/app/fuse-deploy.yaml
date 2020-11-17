@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"product-catalog-fuse:latest","namespace":"fuse-api-demo"},"fieldPath":"spec.template.spec.containers[?(@.name==\"product-catalog-fuse\")].image"}]'
+    app.openshift.io/connects-to: database
+    app.openshift.io/vcs-ref: master
+    app.openshift.io/vcs-uri: 'https://github.com/gnunn1/product-catalog-fuse'    
+  labels:
+    app: product-catalog-fuse
+    app.kubernetes.io/component: product-catalog-fuse
+    app.kubernetes.io/instance: product-catalog-fuse
+    app.kubernetes.io/name: product-catalog-fuse
+    app.kubernetes.io/part-of: product-catalog
+    app.openshift.io/runtime: camel
+  name: product-catalog-fuse
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      deployment: product-catalog-fuse
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        openshift.io/generated-by: OpenShiftNewApp
+      creationTimestamp: null
+      labels:
+        deployment: product-catalog-fuse
+    spec:
+      containers:
+      - image: image-registry.openshift-image-registry.svc:5000/fuse-api-demo/product-catalog-fuse@sha256:408b70eaccf234014f96594d1909293771dceda9279f5f742d1e10e51b6ef8f8
+        imagePullPolicy: IfNotPresent
+        name: product-catalog-fuse
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 8778
+          protocol: TCP
+        - containerPort: 9779
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

@@ -1,0 +1,38 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: product-catalog-fuse
+    app.kubernetes.io/component: product-catalog-fuse
+    app.kubernetes.io/instance: product-catalog-fuse
+    app.kubernetes.io/name: product-catalog-fuse
+    app.kubernetes.io/part-of: product-catalog
+    app.openshift.io/runtime: camel
+  name: product-catalog-fuse
+spec:
+  failedBuildsHistoryLimit: 5
+  output:
+    to:
+      kind: ImageStreamTag
+      name: product-catalog-fuse:latest
+  postCommit: {}
+  resources: {}
+  runPolicy: Serial
+  source:
+    binary: {}
+    type: Binary
+  strategy:
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: fuse7-java-openshift:1.7
+        namespace: openshift
+    type: Source
+  successfulBuildsHistoryLimit: 5
+  triggers:
+  - github:
+      secret: NLXDLn-wcTZXJi2ZXYEg
+    type: GitHub
+  - generic:
+      secret: NZMAvjlEvS1RC1MxXei-
+    type: Generic

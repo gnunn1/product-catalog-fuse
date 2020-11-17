@@ -1,0 +1,14 @@
+
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: fuse-api-demo
+
+resources:
+- namespace.yaml
+- github.com/gnunn-gitops/product-catalog/manifests/app/database/base
+- fuse-is.yaml
+- fuse-bc.yaml
+- fuse-deploy.yaml
+- fuse-svc.yaml
+- fuse-route.yaml

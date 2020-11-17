@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: Project for Fuse API Demo
+    openshift.io/display-name:  Fuse API Demo
+  name: fuse-api-demo

@@ -1,0 +1,14 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    app: product-catalog-fuse
+    app.kubernetes.io/component: product-catalog-fuse
+    app.kubernetes.io/instance: product-catalog-fuse
+    app.kubernetes.io/name: product-catalog-fuse
+    app.kubernetes.io/part-of: product-catalog
+    app.openshift.io/runtime: camel
+  name: product-catalog-fuse
+spec:
+  lookupPolicy:
+    local: false
