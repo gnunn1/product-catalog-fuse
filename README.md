@@ -40,6 +40,7 @@ To build the code, first you need to compile and generate the stub. You can do t
 
 ```
 cd stub
+mvn camel-restdsl-openapi:generate
 mvn package install
 ```
 
