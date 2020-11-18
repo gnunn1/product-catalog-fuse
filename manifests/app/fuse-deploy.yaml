@@ -5,7 +5,7 @@ metadata:
     image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"product-catalog-fuse:latest","namespace":"fuse-api-demo"},"fieldPath":"spec.template.spec.containers[?(@.name==\"product-catalog-fuse\")].image"}]'
     app.openshift.io/connects-to: database
     app.openshift.io/vcs-ref: master
-    app.openshift.io/vcs-uri: 'https://github.com/gnunn1/product-catalog-fuse'    
+    app.openshift.io/vcs-uri: 'https://github.com/gnunn1/product-catalog-fuse'
   labels:
     app: product-catalog-fuse
     app.kubernetes.io/component: product-catalog-fuse
@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
       - image: image-registry.openshift-image-registry.svc:5000/fuse-api-demo/product-catalog-fuse@sha256:408b70eaccf234014f96594d1909293771dceda9279f5f742d1e10e51b6ef8f8
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: product-catalog-fuse
         ports:
         - containerPort: 8080
@@ -49,6 +49,24 @@ spec:
         - containerPort: 9779
           protocol: TCP
           name: prometheus
+        env:
+        - name: MARIADB_SERVICE
+          value: productdb
+        - name: MARIADB_USER
+          valueFrom:
+            secretKeyRef:
+              name: productdb
+              key: database-user
+        - name: MARIADB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: productdb
+              key: database-password
+        - name: MARIADB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: productdb
+              key: database-name
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
