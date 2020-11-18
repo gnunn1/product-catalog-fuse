@@ -27,7 +27,9 @@ public class UpdateProduct extends RouteBuilder {
             .simple("${header.CamelSqlRowCount} == 1")
             .to("sql:{{product.sql.update}}")
           .otherwise()
-            .log("Record does not exist, could not insert record with id ${headers.id}")
-            .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(404));
+            .log("Record does not exist, could not update record with id ${headers.id}")
+            .setHeader(Exchange.HTTP_RESPONSE_CODE, constant(404))
+            .setHeader(Exchange.CONTENT_TYPE, constant("text/plain"))
+            .setBody().constant("Record does not exist, could not update record");
     }
 }
