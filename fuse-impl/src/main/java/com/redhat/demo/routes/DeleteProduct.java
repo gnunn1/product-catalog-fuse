@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DeleteProduct extends RouteBuilder {
-   
+
     @Override
     public void configure() throws Exception {
         onException(SQLException.class)
@@ -15,7 +15,7 @@ public class DeleteProduct extends RouteBuilder {
             .to("direct:databaseerror");
 
         from("direct:deleteproduct")
-            .id("direct-deleteProduct")
+            .routeId("direct-deleteProduct")
             .to("sql:{{product.sql.delete}}");
 }
 }

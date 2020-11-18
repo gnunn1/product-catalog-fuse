@@ -17,7 +17,7 @@ public class GetAllProducts extends RouteBuilder {
         .to("direct:databaseerror");
 
       from("direct:getproducts")
-        .id("direct-getAllProducts")
+        .routeId("direct-getAllProducts")
         .to("sql:{{product.sql.selectAll}}")
         .marshal().json(JsonLibrary.Jackson);
     }

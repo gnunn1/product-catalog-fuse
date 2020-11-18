@@ -18,7 +18,7 @@ public class CreateProduct extends RouteBuilder {
         .to("direct:databaseerror");
 
       from("direct:createproduct")
-        .id("direct-createProduct")
+        .routeId("direct-createProduct")
         .bean(JSONToHeadersBean.class, "jsonToHeaders")
         .to("sql:{{product.sql.insert}}");
     }

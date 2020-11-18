@@ -19,7 +19,7 @@ public class UpdateProduct extends RouteBuilder {
         .to("direct:databaseerror");
 
       from("direct:updateproduct")
-        .id("direct-updateProduct")
+        .routeId("direct-updateProduct")
         .bean(JSONToHeadersBean.class, "jsonToHeaders")
         .to("sql:{{product.sql.selectById}}")
         .choice()
