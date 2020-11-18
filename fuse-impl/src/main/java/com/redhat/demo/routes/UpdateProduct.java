@@ -1,5 +1,7 @@
 package com.redhat.demo.routes;
 
+import java.sql.SQLException;
+
 import com.redhat.demo.beans.JSONToHeadersBean;
 
 import org.apache.camel.Exchange;
@@ -11,7 +13,13 @@ public class UpdateProduct extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
+
+      onException(SQLException.class)
+        .handled(true)
+        .to("direct:databaseerror");
+
       from("direct:updateproduct")
+        .id("direct-updateProduct")
         .bean(JSONToHeadersBean.class, "jsonToHeaders")
         .to("sql:{{product.sql.selectById}}")
         .choice()

@@ -3,22 +3,19 @@ package com.redhat.demo.routes;
 import java.sql.SQLException;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.stereotype.Component;
 
 @Component
-public class GetProduct extends RouteBuilder {
-
+public class DeleteProduct extends RouteBuilder {
+   
     @Override
     public void configure() throws Exception {
-
         onException(SQLException.class)
             .handled(true)
             .to("direct:databaseerror");
 
-        from("direct:getproduct")
-            .id("direct-getProductById")
-            .to("sql:{{product.sql.selectById}}")
-            .marshal().json(JsonLibrary.Jackson);
-    }
+        from("direct:deleteproduct")
+            .id("direct-deleteProduct")
+            .to("sql:{{product.sql.delete}}");
+}
 }
