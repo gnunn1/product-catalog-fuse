@@ -4,9 +4,11 @@ kind: Kustomization
 
 namespace: fuse-api-demo
 
+bases:
+- github.com/gnunn-gitops/product-catalog/manifests/app/database/base
+
 resources:
 - namespace.yaml
-- github.com/gnunn-gitops/product-catalog/manifests/app/database/base
 - fuse-is.yaml
 - fuse-bc.yaml
 - fuse-deploy.yaml
